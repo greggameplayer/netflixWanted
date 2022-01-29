@@ -1,7 +1,8 @@
 package com.greg.netflixwanted.interfaces
 
+import com.greg.netflixwanted.beans.RetrofitConfig
 import com.greg.netflixwanted.beans.SearchResponse
-import retrofit2.Response
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
@@ -13,5 +14,6 @@ interface RetrofitService {
     @GET("/search")
     suspend fun search(@Query("newdate") date: Date?, @Query("query") query: String,
                        @Query("countrylist") countries : String?, @Query("genrelist") genres : String?,
-                       @Header("X-RapidAPI-Key") key: String, @Header("X-RapidAPI-Host") host: String = "unogsng.p.rapidapi.com"): Response<SearchResponse>
+                       @Header("X-RapidAPI-Key") key: String = RetrofitConfig.API_KEY,
+                       @Header("X-RapidAPI-Host") host: String = RetrofitConfig.BASE_URL.substringAfterLast('/')): Observable<SearchResponse>
 }
