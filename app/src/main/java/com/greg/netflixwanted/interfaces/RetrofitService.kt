@@ -11,8 +11,8 @@ import java.util.*
 interface RetrofitService {
 
     // Endpoint for searching movies or series by title or by date or by countries or by genres
-    @GET("/search")
-    suspend fun search(@Query("newdate") date: Date?, @Query("query") query: String,
+    @GET("search")
+    fun search(@Query("newdate") date: Date?, @Query("query") query: String,
                        @Query("countrylist") countries : String?, @Query("genrelist") genres : String?,
                        @Header("X-RapidAPI-Key") key: String = RetrofitConfig.API_KEY,
                        @Header("X-RapidAPI-Host") host: String = RetrofitConfig.BASE_URL.substringAfterLast('/')): Observable<SearchResponse>
