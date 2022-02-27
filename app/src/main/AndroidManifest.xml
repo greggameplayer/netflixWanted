@@ -25,6 +25,10 @@
                 android:name=".SearchActivity"
                 android:exported="false"
         />
+        <activity
+                android:name=".controllers.MovieController"
+                android:exported="false"
+                />
     </application>
 
 </manifest>
