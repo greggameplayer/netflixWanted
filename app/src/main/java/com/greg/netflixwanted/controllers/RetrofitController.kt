@@ -4,14 +4,15 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.greg.netflixwanted.beans.RetrofitConfig.Companion.BASE_URL
 import com.greg.netflixwanted.beans.RetrofitConfig.Companion.BASE_URL_MONGO
-import com.greg.netflixwanted.interfaces.RetrofitService
-import com.greg.netflixwanted.interfaces.RetrofitServiceMongo
+import com.greg.netflixwanted.services.interfaces.RetrofitService
+import com.greg.netflixwanted.services.interfaces.RetrofitServiceMongo
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import org.json.JSONException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import kotlin.math.max
 
 
 class RetrofitController {
@@ -58,17 +59,21 @@ class RetrofitController {
 
         }
 
-        fun getRetrofitUpdateOneParam(): JsonObject {
+        fun getRetrofitUpdateOneParam(callsMade: String?): JsonObject {
             var gsonObject = JsonObject()
 
             try {
                 val dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                val longNumberObject = JsonObject()
+                if (callsMade != null) {
+                    longNumberObject.addProperty("\$numberLong", max(callsMade.toLong() - 5, 0).toString())
+                }
                 val jsonObject = JsonObject()
                 val nestedObject = JsonObject()
                 val setNestedObject = JsonObject()
                 val incNestedObject = JsonObject()
-                incNestedObject.addProperty("calls", -1)
-                setNestedObject.add("\$inc", incNestedObject)
+                incNestedObject.add("calls", longNumberObject)
+                setNestedObject.add("\$set", incNestedObject)
                 nestedObject.addProperty("date", dateFormat.format(LocalDate.now()))
                 jsonObject.addProperty("dataSource", "Cluster0")
                 jsonObject.addProperty("database", "netflixWanted")
