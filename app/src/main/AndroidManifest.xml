@@ -28,7 +28,7 @@
         <activity
                 android:name=".controllers.MovieController"
                 android:exported="false"
-                />
+        />
     </application>
 
 </manifest>
