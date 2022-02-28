@@ -58,7 +58,6 @@ class SearchActivity  : AppCompatActivity(), CoroutineScope {
     }
 
     private fun onResponse(response: Any) {
-        apiResult = response
         Toast.makeText(this,response.toString(), Toast.LENGTH_SHORT).show()
     }
 
