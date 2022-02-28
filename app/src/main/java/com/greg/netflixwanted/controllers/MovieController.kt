@@ -8,6 +8,8 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginBottom
+import androidx.core.view.marginRight
 import com.bumptech.glide.Glide
 import com.greg.netflixwanted.Application
 import com.greg.netflixwanted.R
@@ -29,9 +31,9 @@ class MovieController : AppCompatActivity(), CoroutineScope {
         job = Job()
         setContentView(R.layout.movie)
 
-        val srcImgMovie : String = intent.extras?.get("srcImgMovie").toString()
-        val movieTitle : String = intent.extras?.get("movieTitle").toString()
-        val countries : String = intent.extras?.get("countries").toString()
+        val srcImgMovie: String = intent.extras?.get("srcImgMovie").toString()
+        val movieTitle: String = intent.extras?.get("movieTitle").toString()
+        val countries: String = intent.extras?.get("countries").toString()
 
         val btnMovie: ImageButton = findViewById(R.id.btn_back)
         val imgMovie: ImageView = findViewById(R.id.img_movie)
@@ -43,30 +45,48 @@ class MovieController : AppCompatActivity(), CoroutineScope {
         tvMovieTitle.text = movieTitle
 
         val countriesList = mutableListOf<String>()
-        for (country in countries.split(",")){
+        for (country in countries.split(",")) {
             countriesList.add(country.split(":")[1].replace("\"", ""))
         }
 
         val wrapper = LinearLayout(this)
         wrapper.orientation = LinearLayout.VERTICAL
         for (country in countriesList) {
-            val countryView = TextView(this)
-            countryView.text = country
-            countryView.setTextColor(Color.WHITE)
-            wrapper.addView(countryView)
+
+            val countryWrapper = LinearLayout(this)
+            countryWrapper.orientation = LinearLayout.HORIZONTAL
+
+            val contryFlag = ImageView(this)
+            launch {
+                val imgUrl =  (application as Application).repository.getCountry(country.trim()).img
+
+                Glide.with(this@MovieController)
+                    .load(imgUrl)
+                    .override(175, 175)
+                    .into(contryFlag)
+
+            }
+
+            countryWrapper.addView(contryFlag)
+
+            val countryName = TextView(this)
+            countryName.text = "     " + country
+            countryName.setTextColor(Color.WHITE)
+            countryName.textSize = 18F
+            countryWrapper.addView(countryName)
+            wrapper.addView(countryWrapper)
+
+            val spacer = TextView(this)
+            spacer.height = 20
+            wrapper.addView(spacer)
         }
         svCountries.addView(wrapper)
 
-        btnMovie.setOnClickListener{
+        btnMovie.setOnClickListener {
             this.finish()
         }
 
-        launch {
-            val result = (application as Application).repository.getAll()
-            println(result)
 
-            println((application as Application).repository.getCountry("United States"))
-        }
     }
 
     override fun onDestroy() {
