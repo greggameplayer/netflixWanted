@@ -6,7 +6,7 @@ import com.greg.netflixwanted.entities.User
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg users: User)
+    fun insert(users: User)
 
     @Delete
     fun delete(user: User)

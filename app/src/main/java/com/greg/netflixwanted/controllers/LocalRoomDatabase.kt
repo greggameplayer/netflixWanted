@@ -6,15 +6,19 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.google.gson.Gson
 import com.greg.netflixwanted.R
-import com.greg.netflixwanted.entities.Country
-import com.greg.netflixwanted.services.dao.CountryDao
+import com.greg.netflixwanted.entities.*
+import com.greg.netflixwanted.services.dao.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.io.InputStream
 
-@Database(entities = [Country::class], version = 1, exportSchema = false)
+@Database(entities = [Country::class, User::class, UserCountry::class, UserCategory::class, Category::class], version = 1, exportSchema = false)
 abstract class LocalRoomDatabase : RoomDatabase() {
     abstract fun countryDao(): CountryDao
+    abstract fun userDao(): UserDao
+    abstract fun categoryDao() : CategoryDao
+    abstract fun userCountryDao(): UserCountryDao
+    abstract fun userCategoryDao():UserCategoryDao
 
     companion object {
         @Volatile
@@ -41,6 +45,12 @@ abstract class LocalRoomDatabase : RoomDatabase() {
                     gson.fromJson(jsonString, Array<Country>::class.java)?.forEach {
                         instance.countryDao().insert(it)
                     }
+
+                    if(instance.userDao().getAll().size<1) {
+                        val user: User = User(0, "27/02/1995")
+                        instance.userDao().insert(user)
+                    }
+
                 }
 
                 INSTANCE = instance
