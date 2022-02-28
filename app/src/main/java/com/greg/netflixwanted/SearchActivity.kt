@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.greg.netflixwanted.beans.SearchResponse
 import com.greg.netflixwanted.beans.SearchResult
 import com.greg.netflixwanted.controllers.MovieController
 import com.greg.netflixwanted.controllers.RetrofitController
@@ -14,6 +15,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import retrofit2.Response
 import kotlin.coroutines.CoroutineContext
 
 class SearchActivity  : AppCompatActivity(), CoroutineScope {
@@ -33,30 +35,15 @@ class SearchActivity  : AppCompatActivity(), CoroutineScope {
 
         btnMovie.setOnClickListener {
 
-            compositeDisposable.add(
-                RetrofitController.getRetrofitServiceMongo().getApiCalls(body = RetrofitController.getRetrofitFindOneParam())
+            compositeDisposable.addAll(
+                RetrofitController.getRetrofitServiceMongo().getApiCalls()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-                    .subscribe({response -> onResponse(response)}, {t -> onFailure(t) }))
-
-            compositeDisposable.add(
-            RetrofitController.getRetrofitService().search(date = null, countries = null, genres = null, query = "Viking")
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({response -> onResponse(response)}, {t -> onFailure(t) }))
-
-            compositeDisposable.add(
-                RetrofitController.getRetrofitServiceMongo().updateApiCalls(body = RetrofitController.getRetrofitUpdateOneParam())
+                    .subscribe({response -> onResponse(response)}, {t -> onFailure(t) }),
+                RetrofitController.getRetrofitService().search(query = "Viking")
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-                    .subscribe({response -> onResponse(response)}, {t -> onFailure(t) }))
-
-
-            val intent = Intent(this@SearchActivity, MovieController::class.java)
-            intent.putExtra("srcImgMovie", (apiResult as SearchResult).img)
-            intent.putExtra("movieTitle", (apiResult as SearchResult).title)
-            intent.putExtra("countries", (apiResult as SearchResult).clist)
-            startActivity(intent)
+                    .subscribe({t -> onResponseSearch(t) }, {t -> onFailure(t) }))
         }
     }
 
@@ -75,5 +62,21 @@ class SearchActivity  : AppCompatActivity(), CoroutineScope {
     private fun onResponse(response: Any) {
         apiResult = response
         Toast.makeText(this,response.toString(), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun onResponseSearch(response: Response<SearchResponse>) {
+        val compositeDisposable = CompositeDisposable()
+
+        compositeDisposable.add(
+        RetrofitController.getRetrofitServiceMongo().updateApiCalls(body = RetrofitController.getRetrofitUpdateOneParam(response.headers().get("x-ratelimit-requests-remaining")))
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe({res -> onResponse(res)}, {t -> onFailure(t) }))
+
+        val intent = Intent(this@SearchActivity, MovieController::class.java)
+        intent.putExtra("srcImgMovie", response.body()?.results?.get(0)?.img)
+        intent.putExtra("movieTitle", response.body()?.results?.get(0)?.title)
+        intent.putExtra("countries", response.body()?.results?.get(0)?.clist)
+        startActivity(intent)
     }
 }

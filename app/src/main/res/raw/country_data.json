@@ -1,0 +1,382 @@
+[
+    {
+      "id": 21,
+      "name": "Argentina",
+      "countrycode": "AR",
+      "expiring": 16,
+      "nl7": 10,
+      "tvids": 5613,
+      "tseries": 1975,
+      "tmovs": 3638
+    },
+    {
+      "id": 23,
+      "name": "Australia",
+      "countrycode": "AU",
+      "expiring": 27,
+      "nl7": 13,
+      "tvids": 6063,
+      "tseries": 2175,
+      "tmovs": 3888
+    },
+    {
+      "id": 26,
+      "name": "Belgium",
+      "countrycode": "BE",
+      "expiring": 20,
+      "nl7": 17,
+      "tvids": 6231,
+      "tseries": 2063,
+      "tmovs": 4168
+    },
+    {
+      "id": 29,
+      "name": "Brazil",
+      "countrycode": "BR",
+      "expiring": 16,
+      "nl7": 10,
+      "tvids": 5774,
+      "tseries": 1977,
+      "tmovs": 3797
+    },
+    {
+      "id": 33,
+      "name": "Canada",
+      "countrycode": "CA",
+      "expiring": 23,
+      "nl7": 21,
+      "tvids": 6057,
+      "tseries": 2073,
+      "tmovs": 3984
+    },
+    {
+      "id": 36,
+      "name": "Colombia",
+      "countrycode": "CO",
+      "expiring": 16,
+      "nl7": 10,
+      "tvids": 5361,
+      "tseries": 1967,
+      "tmovs": 3394
+    },
+    {
+      "id": 307,
+      "name": "Czech Republic",
+      "countrycode": "CZ",
+      "expiring": 27,
+      "nl7": 27,
+      "tvids": 7413,
+      "tseries": 2074,
+      "tmovs": 5339
+    },
+    {
+      "id": 45,
+      "name": "France",
+      "countrycode": "FR",
+      "expiring": 20,
+      "nl7": 19,
+      "tvids": 6001,
+      "tseries": 2039,
+      "tmovs": 3962
+    },
+    {
+      "id": 39,
+      "name": "Germany",
+      "countrycode": "DE",
+      "expiring": 28,
+      "nl7": 24,
+      "tvids": 6775,
+      "tseries": 2109,
+      "tmovs": 4666
+    },
+    {
+      "id": 327,
+      "name": "Greece",
+      "countrycode": "GR",
+      "expiring": 23,
+      "nl7": 26,
+      "tvids": 6303,
+      "tseries": 1987,
+      "tmovs": 4316
+    },
+    {
+      "id": 331,
+      "name": "Hong Kong",
+      "countrycode": "HK",
+      "expiring": 17,
+      "nl7": 8,
+      "tvids": 5698,
+      "tseries": 2117,
+      "tmovs": 3581
+    },
+    {
+      "id": 334,
+      "name": "Hungary",
+      "countrycode": "HU",
+      "expiring": 28,
+      "nl7": 27,
+      "tvids": 6904,
+      "tseries": 2067,
+      "tmovs": 4837
+    },
+    {
+      "id": 265,
+      "name": "Iceland",
+      "countrycode": "IS",
+      "expiring": 30,
+      "nl7": 19,
+      "tvids": 6345,
+      "tseries": 2058,
+      "tmovs": 4287
+    },
+    {
+      "id": 337,
+      "name": "India",
+      "countrycode": "IN",
+      "expiring": 28,
+      "nl7": 10,
+      "tvids": 5962,
+      "tseries": 2270,
+      "tmovs": 3692
+    },
+    {
+      "id": 336,
+      "name": "Israel",
+      "countrycode": "IL",
+      "expiring": 28,
+      "nl7": 10,
+      "tvids": 5759,
+      "tseries": 2039,
+      "tmovs": 3720
+    },
+    {
+      "id": 269,
+      "name": "Italy",
+      "countrycode": "IT",
+      "expiring": 21,
+      "nl7": 29,
+      "tvids": 6090,
+      "tseries": 1995,
+      "tmovs": 4095
+    },
+    {
+      "id": 267,
+      "name": "Japan",
+      "countrycode": "JP",
+      "expiring": 19,
+      "nl7": 12,
+      "tvids": 6642,
+      "tseries": 2431,
+      "tmovs": 4211
+    },
+    {
+      "id": 357,
+      "name": "Lithuania",
+      "countrycode": "LT",
+      "expiring": 25,
+      "nl7": 28,
+      "tvids": 6451,
+      "tseries": 2066,
+      "tmovs": 4385
+    },
+    {
+      "id": 378,
+      "name": "Malaysia",
+      "countrycode": "MY",
+      "expiring": 24,
+      "nl7": 10,
+      "tvids": 5974,
+      "tseries": 2388,
+      "tmovs": 3586
+    },
+    {
+      "id": 65,
+      "name": "Mexico",
+      "countrycode": "MX",
+      "expiring": 15,
+      "nl7": 9,
+      "tvids": 5775,
+      "tseries": 1972,
+      "tmovs": 3803
+    },
+    {
+      "id": 67,
+      "name": "Netherlands",
+      "countrycode": "NL",
+      "expiring": 22,
+      "nl7": 23,
+      "tvids": 6428,
+      "tseries": 2013,
+      "tmovs": 4415
+    },
+    {
+      "id": 390,
+      "name": "Philippines",
+      "countrycode": "PH",
+      "expiring": 24,
+      "nl7": 12,
+      "tvids": 5822,
+      "tseries": 2365,
+      "tmovs": 3457
+    },
+    {
+      "id": 392,
+      "name": "Poland",
+      "countrycode": "PL",
+      "expiring": 19,
+      "nl7": 16,
+      "tvids": 5937,
+      "tseries": 1960,
+      "tmovs": 3977
+    },
+    {
+      "id": 268,
+      "name": "Portugal",
+      "countrycode": "PT",
+      "expiring": 20,
+      "nl7": 23,
+      "tvids": 6129,
+      "tseries": 1980,
+      "tmovs": 4149
+    },
+    {
+      "id": 400,
+      "name": "Romania",
+      "countrycode": "RO",
+      "expiring": 26,
+      "nl7": 25,
+      "tvids": 6389,
+      "tseries": 2002,
+      "tmovs": 4387
+    },
+    {
+      "id": 402,
+      "name": "Russia",
+      "countrycode": "RU",
+      "expiring": 17,
+      "nl7": 15,
+      "tvids": 5749,
+      "tseries": 2070,
+      "tmovs": 3679
+    },
+    {
+      "id": 408,
+      "name": "Singapore",
+      "countrycode": "SG",
+      "expiring": 22,
+      "nl7": 9,
+      "tvids": 6357,
+      "tseries": 2376,
+      "tmovs": 3981
+    },
+    {
+      "id": 412,
+      "name": "Slovakia",
+      "countrycode": "SK",
+      "expiring": 26,
+      "nl7": 25,
+      "tvids": 6488,
+      "tseries": 2079,
+      "tmovs": 4409
+    },
+    {
+      "id": 447,
+      "name": "South Africa",
+      "countrycode": "ZA",
+      "expiring": 36,
+      "nl7": 14,
+      "tvids": 5721,
+      "tseries": 2159,
+      "tmovs": 3562
+    },
+    {
+      "id": 348,
+      "name": "South Korea",
+      "countrycode": "KR",
+      "expiring": 20,
+      "nl7": 7,
+      "tvids": 5468,
+      "tseries": 2011,
+      "tmovs": 3457
+    },
+    {
+      "id": 270,
+      "name": "Spain",
+      "countrycode": "ES",
+      "expiring": 16,
+      "nl7": 22,
+      "tvids": 6181,
+      "tseries": 1999,
+      "tmovs": 4182
+    },
+    {
+      "id": 73,
+      "name": "Sweden",
+      "countrycode": "SE",
+      "expiring": 35,
+      "nl7": 30,
+      "tvids": 5792,
+      "tseries": 1942,
+      "tmovs": 3850
+    },
+    {
+      "id": 34,
+      "name": "Switzerland",
+      "countrycode": "CH",
+      "expiring": 23,
+      "nl7": 7,
+      "tvids": 6069,
+      "tseries": 2157,
+      "tmovs": 3912
+    },
+    {
+      "id": 425,
+      "name": "Thailand",
+      "countrycode": "TH",
+      "expiring": 26,
+      "nl7": 6,
+      "tvids": 6252,
+      "tseries": 2346,
+      "tmovs": 3906
+    },
+    {
+      "id": 432,
+      "name": "Turkey",
+      "countrycode": "TR",
+      "expiring": 21,
+      "nl7": 24,
+      "tvids": 5659,
+      "tseries": 1972,
+      "tmovs": 3687
+    },
+    {
+      "id": 436,
+      "name": "Ukraine",
+      "countrycode": "UA",
+      "expiring": 20,
+      "nl7": 4,
+      "tvids": 5362,
+      "tseries": 2057,
+      "tmovs": 3305
+    },
+    {
+      "id": 46,
+      "name": "United Kingdom",
+      "countrycode": "GB",
+      "expiring": 35,
+      "nl7": 5,
+      "tvids": 6474,
+      "tseries": 2241,
+      "tmovs": 4233
+    },
+    {
+      "id": 78,
+      "name": "United States",
+      "countrycode": "US",
+      "expiring": 26,
+      "nl7": 14,
+      "tvids": 5887,
+      "tseries": 2114,
+      "tmovs": 3773
+    }
+  ]
