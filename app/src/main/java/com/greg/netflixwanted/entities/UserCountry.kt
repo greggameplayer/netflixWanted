@@ -1,5 +1,6 @@
 package com.greg.netflixwanted.entities
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
@@ -21,6 +22,8 @@ import androidx.room.ForeignKey.CASCADE
         )
     ])
 data class UserCountry(
+    @ColumnInfo(name = "idUser", index = true)
     val idUser: Int,
+    @ColumnInfo(name = "idCountry", index = true)
     val idCountry: Int
 )
