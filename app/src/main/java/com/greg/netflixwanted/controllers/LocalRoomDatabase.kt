@@ -25,7 +25,7 @@ abstract class LocalRoomDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     LocalRoomDatabase::class.java,
-                    "netflix_wanted_database"
+                    "netflix_wanted_db"
                 )
                     .build()
 
