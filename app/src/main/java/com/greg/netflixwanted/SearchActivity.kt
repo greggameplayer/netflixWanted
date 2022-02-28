@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.greg.netflixwanted.beans.ApiCallsResponse
 import com.greg.netflixwanted.beans.SearchResponse
 import com.greg.netflixwanted.beans.SearchResult
 import com.greg.netflixwanted.controllers.MovieController
@@ -17,13 +18,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import retrofit2.Response
 import kotlin.coroutines.CoroutineContext
+import kotlin.properties.Delegates
 
 class SearchActivity  : AppCompatActivity(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
     private lateinit var job: Job
-    private lateinit var apiResult: Any
+    private var apiCalls by Delegates.notNull<Int>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         job = Job()
@@ -35,15 +37,11 @@ class SearchActivity  : AppCompatActivity(), CoroutineScope {
 
         btnMovie.setOnClickListener {
 
-            compositeDisposable.addAll(
+            compositeDisposable.add(
                 RetrofitController.getRetrofitServiceMongo().getApiCalls()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-                    .subscribe({response -> onResponse(response)}, {t -> onFailure(t) }),
-                RetrofitController.getRetrofitService().search(query = "Viking")
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe({t -> onResponseSearch(t) }, {t -> onFailure(t) }))
+                    .subscribe({response -> onResponseGetApiCalls(response)}, {t -> onFailure(t) }))
         }
     }
 
@@ -64,8 +62,24 @@ class SearchActivity  : AppCompatActivity(), CoroutineScope {
         Toast.makeText(this,response.toString(), Toast.LENGTH_SHORT).show()
     }
 
+    private fun onResponseGetApiCalls(response: ApiCallsResponse) {
+        val compositeDisposable = CompositeDisposable()
+
+        apiCalls = response.document.calls
+
+        if (apiCalls > 0) {
+            compositeDisposable.add(RetrofitController.getRetrofitService().search(query = "Viking")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({t -> onResponseSearch(t) }, {t -> onFailure(t) }))
+        } else {
+            Toast.makeText(this@SearchActivity,"No more api calls available", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun onResponseSearch(response: Response<SearchResponse>) {
         val compositeDisposable = CompositeDisposable()
+
 
         compositeDisposable.add(
         RetrofitController.getRetrofitServiceMongo().updateApiCalls(body = RetrofitController.getRetrofitUpdateOneParam(response.headers().get("x-ratelimit-requests-remaining")))
