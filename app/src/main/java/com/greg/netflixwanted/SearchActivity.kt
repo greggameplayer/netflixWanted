@@ -67,7 +67,7 @@ class SearchActivity  : AppCompatActivity(), CoroutineScope {
         apiCalls = response.document.calls
 
         if (apiCalls > 0) {
-            compositeDisposable.add(RetrofitController.getRetrofitService().search(query = "Viking")
+            compositeDisposable.add(RetrofitController.getRetrofitService().search(query = "test")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({t -> onResponseSearch(t) }, {t -> onFailure(t) }))
@@ -85,6 +85,8 @@ class SearchActivity  : AppCompatActivity(), CoroutineScope {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({res -> onResponse(res)}, {t -> onFailure(t) }))
+
+        println(response.body())
 
         val intent = Intent(this@SearchActivity, MovieController::class.java)
         intent.putExtra("srcImgMovie", response.body()?.results?.get(0)?.img)
