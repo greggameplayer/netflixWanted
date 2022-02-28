@@ -20,7 +20,7 @@
             android:id="@+id/editTextSearch"
             android:hint="Rechercher" android:layout_marginTop="32dp"
             app:layout_constraintTop_toBottomOf="@+id/TextViewTitlePageSearch"
-            tools:layout_editor_absoluteX="38dp"/>
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="38dp"/>
     <Spinner
             android:layout_width="125dp"
             android:layout_height="42dp" android:id="@+id/spinner"
@@ -35,11 +35,14 @@
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="88dp" android:text="🔍"/>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="363dp"
-            android:layout_height="581dp" tools:layout_editor_absoluteY="149dp" tools:layout_editor_absoluteX="35dp">
-
+            android:layout_height="581dp" android:layout_marginTop="14dp"
+            app:layout_constraintTop_toBottomOf="@+id/btSearch" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="35dp" android:layout_marginEnd="13dp" app:layout_constraintEnd_toEndOf="parent">
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="361dp"
-                android:layout_height="579dp" tools:layout_editor_absoluteY="1dp" tools:layout_editor_absoluteX="1dp"
-                android:id="@+id/searchRecyclerView"/>
+                android:layout_height="579dp"
+                android:id="@+id/searchRecyclerView" app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="1dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginEnd="2dp" app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
