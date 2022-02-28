@@ -2,14 +2,17 @@ package com.greg.netflixwanted
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import com.greg.netflixwanted.beans.ApiCallsResponse
 import com.greg.netflixwanted.beans.SearchResponse
 import com.greg.netflixwanted.beans.SearchResult
 import com.greg.netflixwanted.controllers.MovieController
 import com.greg.netflixwanted.controllers.RetrofitController
+import com.greg.netflixwanted.controllers.SearchListAdapter
+import com.greg.netflixwanted.databinding.ActivitySearchBinding
+import com.greg.netflixwanted.interfaces.OnSearchClickListener
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -20,29 +23,41 @@ import retrofit2.Response
 import kotlin.coroutines.CoroutineContext
 import kotlin.properties.Delegates
 
-class SearchActivity  : AppCompatActivity(), CoroutineScope {
+class SearchActivity  : AppCompatActivity(), CoroutineScope, OnSearchClickListener {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
+
+    lateinit var binding: ActivitySearchBinding
 
     private lateinit var job: Job
     private var apiCalls by Delegates.notNull<Int>()
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding = ActivitySearchBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         job = Job()
-        setContentView(R.layout.activity_search)
+        createSearchList()
+        setContentView(binding.root)
+    }
 
+    private fun createSearchList(){
         val compositeDisposable = CompositeDisposable()
 
-        val btnMovie: Button = findViewById(R.id.btnMovie)
+        compositeDisposable.add(RetrofitController.getRetrofitServiceMongo().getApiCalls()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe({t -> onResponseGetApiCalls(t) }, {t -> onFailure(t) }))
+    }
 
-        btnMovie.setOnClickListener {
+    private fun afficheListSearch(listSearch: List<SearchResult>){
+        binding.searchRecyclerView.setHasFixedSize(true)
+        val searchListLayoutManager = GridLayoutManager(this, 3)
+        binding.searchRecyclerView.layoutManager = searchListLayoutManager
+        val searchListAdapter = SearchListAdapter(listSearch, this)
+        binding.searchRecyclerView.adapter = searchListAdapter
+    }
 
-            compositeDisposable.add(
-                RetrofitController.getRetrofitServiceMongo().getApiCalls()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe({response -> onResponseGetApiCalls(response)}, {t -> onFailure(t) }))
-        }
+    override fun onSearchClick(search: SearchResult) {
+        TODO("Not yet implemented")
     }
 
 
@@ -86,12 +101,13 @@ class SearchActivity  : AppCompatActivity(), CoroutineScope {
             .subscribeOn(Schedulers.io())
             .subscribe({res -> onResponse(res)}, {t -> onFailure(t) }))
 
-        val intent = Intent(this@SearchActivity, MovieController::class.java)
-        intent.putExtra("srcImgMovie", response.body()?.results?.get(0)?.img)
-        intent.putExtra("movieTitle", response.body()?.results?.get(0)?.title)
-        intent.putExtra("countries",
-            response.body()?.results?.get(0)?.clist?.indexOf(",\"more\"")
-                ?.let { response.body()?.results?.get(0)?.clist?.substring(0, it) })
-        startActivity(intent)
+        response.body()?.let { afficheListSearch(it.results) }
+        //val intent = Intent(this@SearchActivity, MovieController::class.java)
+        //intent.putExtra("srcImgMovie", response.body()?.results?.get(0)?.img)
+        //intent.putExtra("movieTitle", response.body()?.results?.get(0)?.title)
+        //intent.putExtra("countries",
+        //    response.body()?.results?.get(0)?.clist?.indexOf(",\"more\"")
+        //        ?.let { response.body()?.results?.get(0)?.clist?.substring(0, it) })
+        //startActivity(intent)
     }
 }

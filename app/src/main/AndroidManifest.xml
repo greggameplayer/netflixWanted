@@ -30,10 +30,6 @@
                 android:name=".controllers.MovieController"
                 android:exported="false"
         />
-        <activity
-                android:name=".Search"
-                android:exported="true">
-        </activity>
     </application>
 
 </manifest>
