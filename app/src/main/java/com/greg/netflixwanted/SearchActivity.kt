@@ -2,8 +2,11 @@ package com.greg.netflixwanted
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.GridLayoutManager
 import com.greg.netflixwanted.beans.ApiCallsResponse
 import com.greg.netflixwanted.beans.SearchResponse
@@ -36,6 +39,7 @@ class SearchActivity  : AppCompatActivity(), CoroutineScope, OnSearchClickListen
         super.onCreate(savedInstanceState)
         job = Job()
         createSearchList()
+        fillSpinner()
         setContentView(binding.root)
     }
 
@@ -110,4 +114,13 @@ class SearchActivity  : AppCompatActivity(), CoroutineScope, OnSearchClickListen
         //        ?.let { response.body()?.results?.get(0)?.clist?.substring(0, it) })
         //startActivity(intent)
     }
+
+    private fun fillSpinner() {
+        val arraySearchType = arrayListOf("Nom", "Pays")
+        val spinner: Spinner = binding.spinner
+        val adapterSearchType: ArrayAdapter<String> =
+            ArrayAdapter<String>(this, R.layout.spinner_list, arraySearchType)
+        spinner.adapter = adapterSearchType
+    }
 }
+
