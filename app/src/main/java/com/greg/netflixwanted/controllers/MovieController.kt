@@ -56,7 +56,9 @@ class MovieController : AppCompatActivity(), CoroutineScope {
 
             val contryFlag = ImageView(this)
             launch {
+                val pays = (application as Application).repository.getCountriesByName(countries)[0].id
                 val imgUrl =  (application as Application).repository.getCountry(country.trim()).img
+
 
                 Glide.with(this@MovieController)
                     .load(imgUrl)

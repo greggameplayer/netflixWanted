@@ -85,11 +85,13 @@ class SearchActivity  : AppCompatActivity(), CoroutineScope, OnSearchClickListen
 
     private fun onResponseGetApiCalls(response: ApiCallsResponse) {
         val compositeDisposable = CompositeDisposable()
+//        val intent = Intent(this@SearchActivity, MovieController::class.java)
+//        intent.putExtra("pays", response.body()?.results?.get(0)?.country)
 
         apiCalls = response.document.calls
 
         if (apiCalls > 0) {
-            compositeDisposable.add(RetrofitController.getRetrofitService().search(query = "test")
+            compositeDisposable.add(RetrofitController.getRetrofitService().search(query=binding.editTextSearch.text.toString(), countries=query.get(0)?.country)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({t -> onResponseSearch(t) }, {t -> onFailure(t) }))
@@ -100,7 +102,6 @@ class SearchActivity  : AppCompatActivity(), CoroutineScope, OnSearchClickListen
 
     private fun onResponseSearch(response: Response<SearchResponse>) {
         val compositeDisposable = CompositeDisposable()
-
 
         compositeDisposable.add(
         RetrofitController.getRetrofitServiceMongo().updateApiCalls(body = RetrofitController.getRetrofitUpdateOneParam(response.headers().get("x-ratelimit-requests-remaining")))
