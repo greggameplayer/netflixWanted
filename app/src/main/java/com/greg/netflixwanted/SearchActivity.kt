@@ -2,6 +2,8 @@ package com.greg.netflixwanted
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
@@ -26,7 +28,7 @@ import retrofit2.Response
 import kotlin.coroutines.CoroutineContext
 import kotlin.properties.Delegates
 
-class SearchActivity  : AppCompatActivity(), CoroutineScope, OnSearchClickListener {
+class SearchActivity  : AppCompatActivity(), CoroutineScope, OnSearchClickListener, AdapterView.OnItemSelectedListener {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
@@ -34,6 +36,7 @@ class SearchActivity  : AppCompatActivity(), CoroutineScope, OnSearchClickListen
 
     private lateinit var job: Job
     private var apiCalls by Delegates.notNull<Int>()
+    private var selectedItem : String="nom"
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -121,6 +124,17 @@ class SearchActivity  : AppCompatActivity(), CoroutineScope, OnSearchClickListen
         val adapterSearchType: ArrayAdapter<String> =
             ArrayAdapter<String>(this, R.layout.spinner_list, arraySearchType)
         spinner.adapter = adapterSearchType
+    }
+
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        when(p2){
+            0->selectedItem="nom"
+            1->selectedItem="pays"
+        }
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        selectedItem="nom"
     }
 }
 
