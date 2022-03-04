@@ -86,12 +86,12 @@ class SearchActivity  : AppCompatActivity(), CoroutineScope {
             .subscribeOn(Schedulers.io())
             .subscribe({res -> onResponse(res)}, {t -> onFailure(t) }))
 
-        println(response.body())
-
         val intent = Intent(this@SearchActivity, MovieController::class.java)
         intent.putExtra("srcImgMovie", response.body()?.results?.get(0)?.img)
         intent.putExtra("movieTitle", response.body()?.results?.get(0)?.title)
-        intent.putExtra("countries", response.body()?.results?.get(0)?.clist)
+        intent.putExtra("countries",
+            response.body()?.results?.get(0)?.clist?.indexOf(",\"more\"")
+                ?.let { response.body()?.results?.get(0)?.clist?.substring(0, it) })
         startActivity(intent)
     }
 }

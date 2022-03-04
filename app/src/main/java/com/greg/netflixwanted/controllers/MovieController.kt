@@ -8,8 +8,6 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.marginBottom
-import androidx.core.view.marginRight
 import com.bumptech.glide.Glide
 import com.greg.netflixwanted.Application
 import com.greg.netflixwanted.R
