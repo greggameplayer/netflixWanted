@@ -15,6 +15,9 @@ interface CountryDao {
     @Query("SELECT * FROM country WHERE name = :name")
     suspend fun getCountryByName(name: String): Country
 
+    @Query("SELECT * FROM country WHERE name LIKE '%' || :name || '%'")
+    suspend fun getCountriesByName(name: String): List<Country>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(country: Country)
 

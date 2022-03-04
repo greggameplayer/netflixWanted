@@ -20,4 +20,8 @@ class CountryRepository(private val countryDao: CountryDao) {
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
     suspend fun getCountry(name: String) = countryDao.getCountryByName(name)
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun getCountriesByName(name: String) = countryDao.getCountriesByName(name)
 }
