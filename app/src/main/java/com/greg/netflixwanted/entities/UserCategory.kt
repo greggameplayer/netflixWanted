@@ -1,5 +1,6 @@
 package com.greg.netflixwanted.entities
 
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -22,8 +23,10 @@ import androidx.room.ForeignKey.CASCADE
         )
     ])
 data class UserCategory(
+    @NonNull
     @ColumnInfo(name = "idUser", index = true)
     val idUser: Int,
+    @NonNull
     @ColumnInfo(name = "idCategory", index = true)
     val idCategory: String
 )

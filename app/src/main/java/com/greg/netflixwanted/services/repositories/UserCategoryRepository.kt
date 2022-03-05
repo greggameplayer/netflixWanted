@@ -13,7 +13,7 @@ class UserCategoryRepository(private val userCategoryDao: UserCategoryDao) {
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun getByUserId(userId:Int) {
-        userCategoryDao.getAllbyId(userId)
+    suspend fun getByUserId(userId:Int?) {
+        userCategoryDao.getAllbyUserId(userId)
     }
 }

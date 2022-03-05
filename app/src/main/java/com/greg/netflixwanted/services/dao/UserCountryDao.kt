@@ -12,6 +12,6 @@ interface UserCountryDao {
     @Delete
     fun delete(userCategory: UserCountry)
 
-    @Query("SELECT * FROM UserCategory WHERE idUser=:id")
-    fun getAllByUserId(id : Int): List<UserCategory>
+    @Query("SELECT * FROM UserCountry WHERE idUser=:id")
+    fun getAllByUserId(id : Int?): List<UserCountry>
 }
