@@ -44,5 +44,41 @@ class CategoryTest {
         }
     }
 
+    @Test
+    @Throws(Exception::class)
+    fun createAndGetCategoryById() {
+        runBlocking {
+            val category: Category = Category("20", "Test3")
+            categoryDao.insert(category)
+            val byName = categoryDao.getCategory(category.categoryId)
+            Assert.assertEquals(category.categoryId, byName.categoryId)
+            Assert.assertEquals(category.name, byName.name)
+        }
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun createGetCategoryByNameAndDeleteCategory() {
+        runBlocking {
+            val category: Category = Category("19", "Test2")
+            categoryDao.insert(category)
+            categoryDao.delete(category)
+            val categoryAfterDel = categoryDao.getCategoryByName("Test2")
+            Assert.assertNull(categoryAfterDel)
+        }
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun getAllCategories() {
+        runBlocking {
+            val categories : Collection<Category>
+            val category: Category = Category("21", "Test4")
+            categoryDao.insert(category)
+            categories = categoryDao.getAll()
+            Assert.assertFalse(categories.isEmpty())
+        }
+    }
+
 
 }
