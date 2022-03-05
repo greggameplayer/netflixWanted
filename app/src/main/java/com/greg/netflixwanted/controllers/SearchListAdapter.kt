@@ -19,6 +19,7 @@ class SearchListAdapter(searchArray: List<SearchResult>, listener: OnSearchClick
 
     override fun onBindViewHolder(holder: SearchListCellHolder, position: Int) {
         holder.bindItems(dataSource[position].img)
+        holder.bindIndex(dataSource[position])
     }
 
     override fun getItemCount(): Int {

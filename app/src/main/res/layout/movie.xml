@@ -24,7 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
     />
     <TextView
-            android:text="Ce film est disponible dans les pays suivants :"
+            android:text="Disponible dans les pays suivants :"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/textView3" android:textSize="20sp"
             android:textColor="@color/white"
